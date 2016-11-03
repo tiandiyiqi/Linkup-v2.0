@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+    <iframe id="cloud" name="cloud" style="margin:0;padding:0;
+     height:100%;width:100%;right:0px;border:solid 0px red;"
+     src="http://cloudflow.cymmetrik.com:9090">"></iframe>
+     
+   <!-- Bootstrap 3.3.4 -->
+    <link href="/public/templates/bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="/public/templates/AdminLTE/dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/public/templates/styles.css">
+    <link id='theme' rel='stylesheet' />
+    <link rel='stylesheet' href='/public/css/tipsy.css' />
+    <link rel='stylesheet' href='/public/css/chat.css' />
+
+    <script src="/public/js/jquery-1.9.1.js"></script>
+    <script src='/public/js/socket.io-client/socket.io.js'></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src='/public/js/jquery-1.11.3.min.js'></script>
+    <script src='/public/js/jquery-ui-1.10.4.custom.min.js'></script>
+    <script src='/public/js/jquery.slimscroll.min.js'></script>
+    <script src='/public/js/jquery.tipsy.js'></script>
+    <script src='/public/js/jquery.main.js'></script>
+
+    <script src='/public/config.js'></script>
+    <script src='/public/i18n_cn.js'></script>
+    <script type="text/javascript"> 
+    //正式放到服务器上时打开
+    function popup_2() {
+      var current_user = document.getElementById('cloud').contentWindow.api.auth.get_current_user();
+      if (current_user.username != 'guest') {
+        $('#chat-title-button').click();
+      }
+    }
+    function popup_l() {
+      setTimeout('popup_2()', 10000);
+    }
+    window.onload=function(){ 
+        var bt989 = window.frames['cloud'].$('#login_button') [0];
+        if (bt989){
+            bt989.addEventListener('click', popup_l);
+        }
+    } 
+
+    </script> 
+</body>
+</html>

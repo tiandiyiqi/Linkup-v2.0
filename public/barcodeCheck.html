@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>barcode check</title>
+<style> 
+.redfont{color:#FF0000} 
+</style> 
+<script >
+window.alert = function(str,color,b,c) 
+{ 
+//检验按钮的坐标
+var okbut = document.getElementById("okBut");
+okbut_w = okbut.clientWidth;
+okbut_h = okbut.clientHeight;
+okbut_x = getLeft(okbut);
+okbut_y = getTop(okbut);
+okbut_c = okbut_x + okbut_w/2;
+okbut_e = okbut_y + okbut_h/2;
+
+var shield = document.createElement("DIV"); 
+shield.id = "shield"; 
+shield.style.position = "absolute"; 
+shield.style.left = (okbut_c-90)+"px"; 
+shield.style.top = (okbut_e+30)+"px"; 
+shield.style.width = "100%"; 
+shield.style.height = document.body.scrollHeight+"px"; 
+//弹出对话框时的背景颜色 
+shield.style.background = "#fff"; 
+shield.style.textAlign = "center"; 
+shield.style.zIndex = "25"; 
+//背景透明 IE有效 
+//shield.style.filter = "alpha(opacity=50)"; 
+var alertFram = document.createElement("DIV"); 
+alertFram.id="alertFram"; 
+alertFram.style.position = "absolute"; 
+alertFram.style.left = (okbut_c-90)+"px"; 
+alertFram.style.top = (okbut_e+30)+"px"; 
+// alertFram.style.marginLeft = "-225px"; 
+// alertFram.style.marginTop = "-75px"; 
+alertFram.style.width = "180px"; 
+alertFram.style.height = "75px"; 
+alertFram.style.background = "#ff0000"; 
+alertFram.style.textAlign = "center"; 
+alertFram.style.lineHeight = "150px"; 
+alertFram.style.zIndex = "300"; 
+strHtml = "<ul style=\"list-style:none;margin:0px;padding:0px;width:100%\">\n"; 
+strHtml += " <li style=\"background:#FDEEF4;text-align:center;font-size:14px;font-weight:bold;height:25px;line-height:25px;border:1px solid #F9CADE;\">  条码检测  </li>\n"; 
+/////正确与错误时不同显示方式
+if (b!=undefined){
+	strHtml += " <li style=\"background:"+color+";text-align:center;font-size:19px;height:40px;line-height:40px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;\">"+str+"</li>\n"; 
+	var str2="";
+	for (var i=0 ; i<b.length ; i++){
+		if (c[i]==1){
+			str2 += '<span style="color:red">'+b[i]+'</span>';
+		}else{
+			str2 += '<span style="color:blue">'+b[i]+'</span>';
+		}
+
+	}
+	strHtml += " <li style=\"text-align:center;font-size:24px;height:60px;line-height:60px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;\">"+str2+"</li>\n"; 
+}else{
+	strHtml += " <li style=\"background:"+color+";text-align:center;font-size:24px;height:75px;line-height:75px;border-left:1px solid #F9CADE;border-right:1px solid #F9CADE;\">"+str+"</li>\n"; 
+}
+
+strHtml += " <li style=\"background:#FDEEF4;text-align:center;font-weight:bold;height:25px;line-height:25px; border:1px solid #F9CADE;\"><input id=\"albut\" type=\"button\" value=\"取  消\" onclick=\"doOk()\" /></li>\n"; 
+strHtml += "</ul>\n"; 
+alertFram.innerHTML = strHtml; 
+document.body.appendChild(alertFram); 
+document.body.appendChild(shield); 
+var ad = setInterval("doAlpha()",50); 
+this.doOk = function(){ 
+	alertFram.style.display = "none"; 
+	shield.style.display = "none"; 
+	document.getElementById("bar1").value="";
+	document.getElementById("bar2").value="";
+	bar1.focus(); 
+} 
+this.onkeydown=function(event){ 
+	var e = event || window.event || arguments.callee.caller.arguments[0]; 
+	if(e && e.keyCode==27){ // 按 Esc 
+	alertFram.style.display = "none"; 
+	shield.style.display = "none"; 
+	document.getElementById("bar1").value="";
+	document.getElementById("bar2").value="";
+	bar1.focus(); 
+	} 
+}; 
+alertFram.focus(); 
+document.body.onselectstart = function(){return false;}; 
+}
+function checkBar(){
+	 
+	var a=document.getElementById("bar1").value;
+	var b=document.getElementById("bar2").value;
+	if (a==b){
+		alert("GOOD","#00CC00");
+	}else{
+		b = b.split("");   //文字
+		a = a.split("");
+		c=[];			   //颜色
+		for (var i =0 ; i<b.length ; i++){
+			if (b[i]==a[i]){
+				c[i]=0  ;  //相同，不突出显示
+			}else{
+				c[i]=1 ;   //不相同，则突出显示
+			}
+		}
+
+		alert(" 这玩意不对啊! ","#FF0000",b,c);
+	}
+
+}
+
+</script>
+</head>
+
+<body >
+<div align=center><br><br>
+条码A:  <input type="text" id='bar1'><br><br>
+条码B:  <input type="text" id='bar2' onkeydown='if(event.keyCode==13){bar2.blur();checkBar()}'><br><br><br>
+<input id="okBut" type="button" value="     检  验     " onclick="checkBar()">
+</div>
+<script>
+bar1.focus(); 
+
+//获取元素的纵坐标 
+function getTop(e){ 
+var offset=e.offsetTop; 
+if(e.offsetParent!=null) offset+=getTop(e.offsetParent); 
+return offset; 
+} 
+//获取元素的横坐标 
+function getLeft(e){ 
+var offset=e.offsetLeft; 
+if(e.offsetParent!=null) offset+=getLeft(e.offsetParent); 
+return offset; 
+} 
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "httpserver",
+  "version": "0.0.8",
+  "description": "",
+  "main": "http.js",
+  "scripts": {
+    "start": "node http.js"
+  },
+  "dependencies": {
+    "compression": "^1.6.2",
+    "express": "*"
+  }
+}

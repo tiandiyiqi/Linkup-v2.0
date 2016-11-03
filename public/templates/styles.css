@@ -1,0 +1,51 @@
+/* 总的 */
+iframe{
+	position:absolute; 
+	height:100%; 
+	overflow:hidden;
+	width:100%;	
+	}
+/*以下两个为发送文件的样式，隐藏原来丑的外观*/
+.boxs 
+{
+float: left;
+}
+#_box1 
+{ 
+width: 66px; 
+height: 20px; 
+background-color: #b7f1aa; 
+background-image: url(images/bg.png); 
+background-repeat: no-repeat; 
+background-position: 0 0; 
+background-attachment: scroll; 
+line-height: 20px; 
+text-align: center; 
+color: #888b87; 
+cursor: pointer; 
+} 
+#_box2
+{ 
+width: 66px; 
+height: 20px; 
+background-color: #fdb1c1; 
+background-image: url(images/bg.png); 
+background-repeat: no-repeat; 
+background-position: 0 0; 
+background-attachment: scroll; 
+line-height: 20px; 
+text-align: center; 
+color: #888b87; 
+cursor: pointer; 
+margin-left:20px;
+} 
+.none 
+{ 
+width: 0px; 
+height: 0px; 
+display: none; 
+} 
+#direct-chat-file {
+	color:blue;
+	text-decoration:underline;
+}

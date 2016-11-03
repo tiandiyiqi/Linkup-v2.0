@@ -1,0 +1,23 @@
+CACHE MANIFEST  
+ 
+# VERSION 0.1  
+ 
+# 直接缓存的文件  
+CACHE:  
+js/jquery-1.9.1.js
+js/socket.io.js
+js/jquery-1.11.3.min.js
+js/jquery-ui-1.10.4.custom.min.js
+js/jquery.slimscroll.min.js
+js/jquery.tipsy.js
+js/jquery.main.js
+config.js
+i18n_cn.js
+
+ 
+# 需要在时间在线的文件  
+NETWORK:  
+ 
+ 
+# 替代方案  
+FALLBACK:  
